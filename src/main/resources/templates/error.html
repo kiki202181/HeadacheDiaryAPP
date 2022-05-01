@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ページが見つかりませんでした</title>
+<link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css" />
+<link th:href="@{/css/error.css}" rel="stylesheet">
+
+</head>
+<body>
+
+	<div class="erromassage">
+		<p>お探しのページは見つかりませんでした。</p>
+
+	</div>
+	<div class="topbutton">
+
+
+		<form th:action="@{/}" method="get">
+			<button class="btnlinestretches">LOGIN PAGE</button>
+		</form>
+
+
+	</div>
+
+</body>
+</html>

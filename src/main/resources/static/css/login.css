@@ -1,0 +1,139 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  background: #e9e9e9;
+  color: #5e5e5e;
+  font: 400 87.5%/1.5em 'Open Sans', sans-serif;
+}
+
+.form-wrapper {
+  background: #fafafa;
+  margin: 3em auto;
+  padding: 0 1em;
+  max-width: 370px;
+}
+
+h1 {
+  text-align: center;
+  padding: 1em 0;
+}
+
+form {
+  padding: 0 1.5em;
+}
+
+.form-item {
+  margin-bottom: 0.75em;
+  width: 100%;
+}
+
+.form-item input {
+  background: #fafafa;
+  border: none;
+  border-bottom: 2px solid #e9e9e9;
+  color: #666;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1em;
+  height: 50px;
+  -webkit-transition: border-color 0.3s;
+  transition: border-color 0.3s;
+  width: 100%;
+}
+
+.form-item input:focus {
+  border-bottom: 2px solid #c0c0c0;
+  outline: none;
+}
+
+.form-footer {
+  font-size: 1em;
+  padding: 2em 0;
+  text-align: center;
+}
+
+.form-footer a {
+  color: #8c8c8c;
+  text-decoration: none;
+  -webkit-transition: border-color 0.3s;
+  transition: border-color 0.3s;
+}
+
+.form-footer a:hover {
+  border-bottom: 1px dotted #8c8c8c;
+}
+
+.contact-submit {
+  width: 250px;
+  background-color: #333;
+  color: #fff;
+  font-weight: bold;
+  display: block;
+  margin: 0 auto;
+  font-size: 16px;
+  padding: 15px;
+  border-radius: 100vh;
+  border: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+}
+
+.contact-submit:hover {
+  background-color: #727272;
+}
+
+a:hover {
+  background-color: #ccc;
+}
+
+.button {
+  margin: 30px 0;
+}
+
+.new-user {
+  color: #727272;
+}
+
+.new-user:hover {
+  color: black;
+  text-decoration: underline;
+}
+
+img {
+  width: 50%;
+}
+
+table {
+  text-align: center;
+  border-collapse: collapse;
+}
+
+table th {
+  height: 10px;
+}
+
+table th, table td {
+  border: solid 1px black;
+  }
+
+.list {
+  width: 1000px;
+  height: 100px;
+}
+
+.types_of_pain {
+  width: 90px;
+}
+
+@media (max-width: 599px) {
+  body {
+    background-color: rgba(0, 0, 0, 0.187);
+  }
+}

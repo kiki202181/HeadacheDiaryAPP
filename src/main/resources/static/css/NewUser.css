@@ -1,0 +1,88 @@
+@charset "UTF-8";
+td {
+  padding-right: 40px;
+}
+
+.time_zone {
+  font-weight: bold;
+}
+
+.one_line {
+  border-bottom: 1px solid #ccc;
+}
+
+.types_of_pain {
+  padding: 3px 0;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  color: #333;
+  font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN",
+ "Hiragino Sans", Meiryo, sans-serif;
+}
+
+.contact {
+  width: 500px;
+  margin: 50px auto;
+}
+
+.contact-ttl {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.contact-table {
+  width: 100%;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+}
+
+.contact-item,
+.contact-body {
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+.contact-item {
+  text-align: left;
+  width: 30%;
+  background-color: #eee;
+}
+
+span {
+  font-size: 2px;
+  text-align: center;
+}
+
+.contact-submit {
+  width: 250px;
+  background-color: #333;
+  color: #fff;
+  font-weight: bold;
+  display: block;
+  margin: 40px auto;
+  font-size: 16px;
+  padding: 15px;
+  border-radius: 100vh;
+  border: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+}
+
+.contact-submit:hover {
+  background-color: #727272;
+}
+
+a:hover {
+  background-color: #ccc;
+}
+/*# sourceMappingURL=style.css.map */

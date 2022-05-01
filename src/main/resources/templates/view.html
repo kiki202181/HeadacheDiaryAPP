@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>View.html</title>
+<link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css" />
+<link th:href="@{/css/view.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+	<form th:action="@{/logout}" method="post">
+		<button class="Logout-button">ログアウト</button>
+	</form>
+
+	<div class="date-content">
+		<form th:action="@{/moving_month}" method="post">
+			<input type="hidden" name="month_button" th:value="last_month">
+			<input type="hidden" name="specified_day" th:value="${specified_day}">
+			<input type="hidden" name="username" th:value="${user.getUsername()}">
+			<button>
+				<img th:src="@{/img/LB.png}" class="triangl">
+			</button>
+		</form>
+		<h1 th:text="${#temporals.format(specified_day, 'yyyy/MM')}"></h1>
+		<form th:action="@{/moving_month}" method="post">
+			<input type="hidden" name="month_button" th:value="next_month">
+			<input type="hidden" name="specified_day" th:value="${specified_day}">
+			<input type="hidden" name="username" th:value="${user.getUsername()}">
+			<button>
+				<img th:src="@{/img/RB.png}" class="triangl">
+			</button>
+		</form>
+	</div>
+
+
+	<table th:object="${calendar}" class="calendar">
+		<tr class="week-title">
+			<td>日</td>
+			<td>月</td>
+			<td>火</td>
+			<td>水</td>
+			<td>木</td>
+			<td>金</td>
+			<td>土</td>
+		</tr>
+		<tr th:each="week : *{weeks}">
+			<td th:each="day : ${week}"
+				th:classappend="${!day.thisMonth} ? grayDate : ''"
+				class="grayDate one-piece">
+				<div th:text="${day.dayOfMonth}" class="days"></div> <th:block
+					th:if="${day.beforeToday}">
+					<img
+						th:src="@{/img/{name}.png(name=${map['__${day.localDate}__']})}"
+						class="morning_condition">
+				</th:block>
+			</td>
+		</tr>
+	</table>
+	<form th:action="@{/addDiary}" method="post">
+		<input type="hidden" name="user_id" th:value="${user_id}">
+		<input type="hidden" name="specified_day" th:value="${specified_day}">
+		<button class="new-button">新規作成</button>
+	</form>
+
+
+
+
+	<th:block th:each="diary : ${diary_list}">
+
+		<div class="list">
+			<table>
+				<tbody>
+					<tr>
+						<th>日付</th>
+						<th>生理</th>
+						<th>朝</th>
+						<th>昼</th>
+						<th>夜</th>
+						<th>影響</th>
+						<th>種類</th>
+						<th>メモ</th>
+						<th></th>
+					</tr>
+					<tr>
+
+						<td rowspan="2" class="date-list">
+							<!--/* 日付 */-->
+							<p th:text="${diary.date}" class="date"></p>
+						</td>
+
+						<td rowspan="2" class="menstruation">
+							<!--/* 生理 */--> <th:block th:if="${diary.menstruation} != null">
+								<img th:src="@{/img/moon.png}" class="menstruation">
+							</th:block>
+						</td>
+
+						<td class="morning_condition"><img
+							th:src="@{/img/{name}.png(name=${diary.morning_condition})}"
+							class="morning_condition"></td>
+
+
+						<td class="noon_condition">
+							<!--/* 昼 */--> <img
+							th:src="@{/img/{name}.png(name=${diary.noon_condition})}"
+							class="noon_condition">
+
+						</td>
+
+
+						<td class="night_condition">
+							<!--/* 夜 */--> <img
+							th:src="@{/img/{name}.png(name=${diary.night_condition})}"
+							class="night_condition">
+						</td>
+
+						<td rowspan="2" class="impact_title">
+							<!--/* 影響 */--> <img
+							th:src="@{/img/{name}.jpg(name=${diary.impact})}" class="impact">
+						</td>
+
+
+						<td rowspan="2" class="types_of_pain">
+							<!--/* 脈打つ痛み */-->
+							<div class="symptoms">
+								<p th:text="${diary.throbbing_pain}" class="throbbing_pain"></p>
+								<!--/* 吐き気 */-->
+								<p th:text="${diary.nausea}" class="nausea"></p>
+								<!--/*嘔吐  */-->
+								<p th:text="${diary.vomiting}" class="vomiting"></p>
+							</div>
+						</td>
+
+						<td rowspan="2" class="memo">
+							<p th:text="${diary.memo}" class="memo"></p>
+
+						</td>
+						<td rowspan="2" class="buttons">
+
+							<div class="edit-icon">
+								<form th:action="@{editDiary}" method="post" class="edit_button">
+									<input type="hidden" name="diary_id"
+										th:value="${diary.diary_id}">
+										<input type="hidden" name="specified_day" th:value="${specified_day}">
+									<button>
+										<img th:src="@{/img/edit-icon.png}">
+									</button>
+								</form>
+							</div>
+
+							<div class="delete-icon">
+								<form th:action="@{deleteDiary}" method="post"
+									class="delete_button">
+									<input type="hidden" name="diary_id"
+										th:value="${diary.diary_id}">
+										<input type="hidden" name="specified_day" th:value="${specified_day}">
+									<button>
+										<img th:src="@{/img/delete-icon.png}">
+									</button>
+								</form>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="medicine"><th:block
+								th:if="${diary.morning_medicine} != null">
+								<img th:src="@{/img/medicine.png}" class="morning_medicine">
+							</th:block></td>
+						<td class="medicine"><th:block
+								th:if="${diary.noon_medicine} != null">
+								<img th:src="@{/img/medicine.png}" class="noon_medicine">
+							</th:block></td>
+						<td class="medicine"><th:block
+								th:if="${diary.night_medicine} != null">
+								<img th:src="@{/img/medicine.png}" class="night_medicine">
+							</th:block></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+
+	</th:block>
+
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+	<script>
+		const DELETE_MESSAGE = "削除してもよろしいですか？"
+		$('.delete_button').click(function() {
+			if (!confirm(DELETE_MESSAGE)) {
+				return false;
+			}
+		});
+	</script>
+
+
+</body>
+</html>

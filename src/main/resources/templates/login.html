@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ログインページ</title>
+<link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css" />
+<link th:href="@{/css/login.css}" rel="styleSheet" type="text/css">
+</head>
+<body>
+
+
+
+
+	<div class="form-wrapper">
+		<h1>Sign In</h1>
+		<form th:action="@{/signIn}" th:object=${User} method="post">
+			<div th:text="${Message}"></div>
+			<div th:text="${ErrorMessage}"></div>
+			<div th:if="${param.logout}">ログアウトしました</div>
+
+			<div class="form-item">
+				<label for="username"></label> <input type="text"
+					th:field="*{username}" required="required" placeholder="User Name"></input>
+			</div>
+			<div class="form-item">
+				<label for="password"></label> <input type="password"
+					th:field="*{password}" required="required" placeholder="Password"></input>
+			</div>
+			<div class="button">
+				<input type="submit" class="contact-submit " title="Sign In"
+					value="Sign In"></input>
+			</div>
+		</form>
+		<div class="form-footer">
+
+			<form th:action="@{/NewUser}" method="get">
+				<button class="new-user">新規作成</button>
+			</form>
+		</div>
+	</div>
+
+
+</body>
+</html>

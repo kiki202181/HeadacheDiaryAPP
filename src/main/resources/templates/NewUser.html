@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ユーザー新規登録</title>
+
+
+<link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css" />
+<link href="https://fonts.googleapis.com/css?family=Philosopher"
+	rel="stylesheet" />
+<link th:href="@{/css/NewUser.css}" rel="stylesheet">
+
+</head>
+<body>
+
+
+	<div class="contact">
+
+		<h1 class="contact-ttl">New user</h1>
+
+		<table>
+			<tr th:if="${validationError}" th:each="error : ${validationError}">
+				<td style="color: red;" th:text="${error}"></td>
+			</tr>
+		</table>
+
+		<form th:action="@{/NewUser}" th:object=${User} method="post">
+
+			<table class="contact-table">
+				<tr>
+					<th class="contact-item">ユーザー名 <br> <span>20文字まで</span>
+					</th>
+					<td class="contact-body"><input type="text" name="username"
+						required="required"></td>
+				</tr>
+				<tr>
+					<th class="contact-item">パスワード <br> <span>20文字まで</span>
+					</th>
+					<td class="contact-body"><input type="password"
+						name="password" required="required"></input></td>
+				</tr>
+			</table>
+
+			<input type="submit" class="contact-submit" title="register"
+				value="登録"></input>
+		</form>
+	</div>
+
+
+	<!-- --------------------------------------------------------------------------------- -->
+
+</body>
+</html>

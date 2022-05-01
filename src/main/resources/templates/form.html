@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>登録</title>
+
+<!-- CSS -->
+<link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css" />
+<link href="https://fonts.googleapis.com/css?family=Philosopher"
+	rel="stylesheet" />
+<link th:href="@{/css/form.css}" rel="stylesheet">
+
+</head>
+<body>
+
+	<form th:action="@{/return_page}" method="post">
+		<input type="hidden" name="specified_day" th:value="${specified_day}">
+		<input type="hidden" name="user_id" th:value="${Diary.getUser_id}">
+		<button class="back-submit">一覧に戻る</button>
+	</form>
+
+	<div class="contact">
+		<h1 class="contact-ttl">Headache diary</h1>
+
+
+		[[${error_message}]]
+		<form th:action="@{/saveDiary}" th:object=${Diary} method="post">
+
+			<table class="contact-table">
+
+				<tr>
+					<th class="contact-item">日付</th>
+					<td class="contact-body"><input type="date" name="date"
+						id="date" th:classappend="${IsDate} ? date : ''"
+						th:value=${Diary.getDate()} /></td>
+				</tr>
+
+				<tr>
+					<th class="contact-item">生理</th>
+					<td class="contact-body"><input type="checkbox"
+						name="menstruation" th:checked="${Diary.getMenstruation()}" />生理中
+					</td>
+				</tr>
+
+				<tr>
+					<th class="contact-item">体調</th>
+					<td class="contact-body">
+						<table>
+							<tbody>
+								<tr class="one_line">
+									<td class="time_zone">朝</td>
+									<td><select th:field="*{morning_condition}"
+										class="morning">
+											<option value="fine"
+												th:selected="${Diary.getMorning_condition()}">普通</option>
+											<option value="not_good">よくない</option>
+											<option value="bad">悪い</option>
+									</select></td>
+									<td><input type="checkbox" name="morning_medicine" />薬</td>
+								</tr>
+
+								<tr class="one_line">
+									<td class="time_zone">昼</td>
+									<td><select th:field="*{noon_condition}" class="morning">
+											<option value="fine"
+												th:selected="${Diary.getNoon_condition()}">普通</option>
+											<option value="not_good">よくない</option>
+											<option value="bad">悪い</option>
+									</select></td>
+									<td><input type="checkbox" name="noon_medicine"
+										th:checked="${Diary.getNoon_medicine()}" />薬</td>
+								</tr>
+								<tr class="one_line">
+									<td class="time_zone">夜</td>
+									<td><select th:field="*{night_condition}" class="morning">
+											<option value="fine"
+												th:selected="${Diary.getNight_condition()}">普通</option>
+											<option value="not_good">よくない</option>
+											<option value="bad">悪い</option>
+									</select></td>
+									<td><input type="checkbox" name="night_medicine"
+										th:checked="${Diary.getNight_medicine()}" />薬</td>
+								</tr>
+
+							</tbody>
+						</table>
+					</td>
+				</tr>
+
+
+				<tr>
+					<th class="contact-item">日常生活への影響</th>
+					<td class="contact-body">
+						<div class="selectdiv">
+							<label> <select th:field="*{impact}" class="impact">
+									<option value="zero" th:selected="${Diary.getImpact()}">日常生活に影響はない。</option>
+									<option value="one">頭痛はあるが、日常生活に大きな支障はない。</option>
+									<option value="two">仕事・学校・家事の能率が通常の半分以下である。</option>
+									<option value="three">何も手につかず、横にならなければならない。</option>
+							</select>
+							</label>
+						</div>
+					</td>
+				</tr>
+
+
+				<tr>
+					<th class="contact-item">症状</th>
+					<td class="contact-body">
+						<div class="types_of_pain">
+							<input type="checkbox" name="throbbing_pain" value="脈打つ痛み"
+								th:checked="${Diary.getThrobbing_pain()}" />脈打つ痛み <input
+								type="checkbox" name="nausea" value="吐き気"
+								th:checked="${Diary.getNausea()}" />吐き気 <input type="checkbox"
+								name="vomiting" value="嘔吐" th:checked="${Diary.getVomiting()}" />嘔吐
+						</div>
+					</td>
+				</tr>
+
+
+
+				<tr>
+					<th class="contact-item">メモ</th>
+					<td class="contact-body"><textarea name="memo"
+							class="form-textarea" th:text="${Diary.getMemo()}"></textarea></td>
+				</tr>
+			</table>
+
+
+			<input type="hidden" th:field="*{diary_id}"> <input
+				type="hidden" th:field="*{user_id}"> <input type="hidden"
+				id="update" name="update">
+				<input type="hidden" name="specified_day" th:value="${specified_day}">
+			<button id="submit" class="contact-submit">送信</button>
+
+		</form>
+	</div>
+
+
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+	<script>
+		const MESSAGE = $("#date").val() + "の日記は既に登録されています。更新しますか？"
+
+		$(function() {
+			if ($('.date').length) {
+
+				if (!confirm(MESSAGE)) {
+					return false;
+				} else {
+					$("#update").val("update");
+					$('#submit').trigger("click");
+
+				}
+
+			}
+		});
+	</script>
+</body>
+</html>
