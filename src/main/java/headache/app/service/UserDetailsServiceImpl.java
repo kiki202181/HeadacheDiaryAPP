@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 import headache.app.entity.LoginUser;
 import headache.app.repository.UserRepository;
 
-
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
@@ -28,30 +27,27 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		List<LoginUser> UserList;
 		UserList = userRepository.findByUserName(username);
-		LoginUser loginUser = UserList.get(0);
+		LoginUser loginUser = null;
 
-		if (null == loginUser) {
-            throw new UsernameNotFoundException("そのユーザー名は存在しません");
-        }
-		
-		String dbUserName = loginUser.getUsername();
-		
-		if (dbUserName == null) {
-			throw new UsernameNotFoundException("そのユーザー名は存在しません");
+		try {
+			
+			loginUser = UserList.get(0);
+			
+		} catch (Exception e) {
+			System.out.println("入力されたユーザーがいません。");
 		}
-		
-		Collection <GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
+
+		Collection<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
 		GrantedAuthority authority = new SimpleGrantedAuthority(loginUser.getAuthority());
-		
+
 		grantList.add(authority);
 
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		String password = encoder.encode(loginUser.getPassword());
 
 		UserDetails userDetails = (UserDetails) new User(username, password, grantList);
-		
+
 		return userDetails;
-		
 
 	}
 

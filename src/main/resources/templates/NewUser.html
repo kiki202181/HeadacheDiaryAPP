@@ -23,6 +23,8 @@
 				<td style="color: red;" th:text="${error}"></td>
 			</tr>
 		</table>
+		
+		<div th:text="${ErrorMessage}" style="color: red;"></div>
 
 		<form th:action="@{/NewUser}" th:object=${User} method="post">
 

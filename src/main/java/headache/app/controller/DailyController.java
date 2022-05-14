@@ -47,6 +47,15 @@ public class DailyController {
 		model.addAttribute("User", user);
 		return "login";
 	}
+	
+	@GetMapping("/login/error")
+   	public String loginError(Model model) {
+   		model.addAttribute("loginError", true);
+   		LoginUser user = new LoginUser();
+   		model.addAttribute("User", user);
+   		model.addAttribute("ErrorMessage", "ユーザー名かパスワードが間違っています。");
+   		return "login";
+   	}
 
 	@GetMapping("/signIn") // ログイン後、viewに全部表示
 	public String view(Authentication formUser, Model model) {
