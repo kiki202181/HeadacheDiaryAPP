@@ -52,7 +52,7 @@ public class Diary {
 	private String nausea;// 吐き気
 	private String vomiting;// 嘔吐
 
-	@Size(max = 20, message = "メモは140文字以内で入力してください")
+	@Size(max = 140, message = "メモは140文字以内で入力してください")
 	private String memo;
 	
 	private long user_id;
