@@ -252,14 +252,18 @@ public class DailyController {
 		d = diary;
 
 		if (result.hasErrors()) {
+			
 			System.out.println("エラーが起こっています");
 			String error_message = "";
-			for (ObjectError error : result.getAllErrors()) {
+			
+			for (ObjectError error : result.getAllErrors()) {//Diaryで設定したエラーメッセージ取得
 				error_message += error.getDefaultMessage();
 				model.addAttribute("error_message", error_message);
 			}
-
-			set_date(d.getUser_id(), model);
+			
+			model.addAttribute("Diary", diary);
+			model.addAttribute("specified_day", specified_day);
+			
 			return "form";
 		}
 
