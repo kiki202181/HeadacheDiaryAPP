@@ -57,8 +57,8 @@
 		</tr>
 	</table>
 	<form th:action="@{/addDiary}" method="post">
-		<input type="hidden" name="user_id" th:value="${user_id}">
-		<input type="hidden" name="specified_day" th:value="${specified_day}">
+		<input type="hidden" name="user_id" th:value="${user_id}"> <input
+			type="hidden" name="specified_day" th:value="${specified_day}">
 		<button class="new-button">新規作成</button>
 	</form>
 
@@ -132,15 +132,14 @@
 
 						<td rowspan="2" class="memo">
 							<p th:text="${diary.memo}" class="memo"></p>
-
 						</td>
 						<td rowspan="2" class="buttons">
 
 							<div class="edit-icon">
 								<form th:action="@{editDiary}" method="post" class="edit_button">
 									<input type="hidden" name="diary_id"
-										th:value="${diary.diary_id}">
-										<input type="hidden" name="specified_day" th:value="${specified_day}">
+										th:value="${diary.diary_id}"> <input type="hidden"
+										name="specified_day" th:value="${specified_day}">
 									<button>
 										<img th:src="@{/img/edit-icon.png}">
 									</button>
@@ -151,8 +150,8 @@
 								<form th:action="@{deleteDiary}" method="post"
 									class="delete_button">
 									<input type="hidden" name="diary_id"
-										th:value="${diary.diary_id}">
-										<input type="hidden" name="specified_day" th:value="${specified_day}">
+										th:value="${diary.diary_id}"> <input type="hidden"
+										name="specified_day" th:value="${specified_day}">
 									<button>
 										<img th:src="@{/img/delete-icon.png}">
 									</button>

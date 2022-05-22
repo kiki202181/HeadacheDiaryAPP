@@ -108,6 +108,9 @@ img {
 	width: 340px;
 	text-align: start;
 }
+.memo p{
+	overflow-wrap: break-word;
+}
 
 .buttons img {
 	margin-bottom: 20px;
